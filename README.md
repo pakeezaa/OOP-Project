@@ -11,9 +11,7 @@ This project implements a travel agency management system with the following res
 - Provide classes for different types of vehicles (standard, luxury), hotel rooms, and packages.
 - Handle booking, billing, and receipt generation.
 - Display menus and manage user interaction for bookings and cancellations.
-# OOP-Project
-Travel Agency Management System (OOP C++)
-## Responsibilities
+
 
 ### Travel Management System Implementation
 
@@ -27,125 +25,125 @@ This project implements a travel agency management system with the following res
 
 #### Main Implementation Code
 
-// ==================== ROOM AND HOTEL CLASSES IMPLEMENTATION ====================
+          // ==================== ROOM AND HOTEL CLASSES IMPLEMENTATION ====================
 
-Room::Room() : roomId(""), roomType(""), pricePerNight(0.0), isBooked(false) {}
+          Room::Room() : roomId(""), roomType(""), pricePerNight(0.0), isBooked(false) {}
 
-Room::Room(string id, string type, double price) 
-    : roomId(id), roomType(type), pricePerNight(price), isBooked(false) {}
+          Room::Room(string id, string type, double price) 
+             : roomId(id), roomType(type), pricePerNight(price), isBooked(false) {}
 
-string Room::getRoomId() const { return roomId; }
-string Room::getRoomType() const { return roomType; }
-double Room::getPricePerNight() const { return pricePerNight; }
-bool Room::getBookingStatus() const { return isBooked; }
-void Room::setBookingStatus(bool status) { isBooked = status; }
+          string Room::getRoomId() const { return roomId; }
+           string Room::getRoomType() const { return roomType; }
+           double Room::getPricePerNight() const { return pricePerNight; }
+           bool Room::getBookingStatus() const { return isBooked; }
+           void Room::setBookingStatus(bool status) { isBooked = status; }
 
-void Room::displayRoom() {
-    cout << "Room ID: " << roomId << endl;
-    cout << "Room Type: " << roomType << endl;
-    cout << "Price per Night: $" << pricePerNight << endl;
-    cout << "Status: " << (isBooked ? "Booked" : "Available") << endl;
-}
+            void Room::displayRoom() {
+            cout << "Room ID: " << roomId << endl;
+            cout << "Room Type: " << roomType << endl;
+            cout << "Price per Night: $" << pricePerNight << endl;
+            cout << "Status: " << (isBooked ? "Booked" : "Available") << endl;
+          }
 
-HotelPackage::HotelPackage() : packageId(""), packageName(""), packagePrice(0.0) {}
+         HotelPackage::HotelPackage() : packageId(""), packageName(""), packagePrice(0.0) {}
 
-HotelPackage::HotelPackage(string id, string name, double price) 
-    : packageId(id), packageName(name), packagePrice(price) {}
+         HotelPackage::HotelPackage(string id, string name, double price) 
+         : packageId(id), packageName(name), packagePrice(price) {}
 
-string HotelPackage::getPackageId() const { return packageId; }
-string HotelPackage::getPackageName() const { return packageName; }
-double HotelPackage::getPackagePrice() const { return packagePrice; }
+         string HotelPackage::getPackageId() const { return packageId; }
+         string HotelPackage::getPackageName() const { return packageName; }
+         double HotelPackage::getPackagePrice() const { return packagePrice; }
 
-void HotelPackage::displayPackage() {
-    cout << "Package ID: " << packageId << endl;
-    cout << "Package Name: " << packageName << endl;
-    cout << "Package Price: $" << packagePrice << endl;
-}
+         void HotelPackage::displayPackage() {
+         cout << "Package ID: " << packageId << endl;
+         cout << "Package Name: " << packageName << endl;
+         cout << "Package Price: $" << packagePrice << endl;
+      }
 
-Hotel::Hotel() : hotelId(""), hotelName(""), location(""), rating(0), roomCount(0), packageCount(0) {}
+       Hotel::Hotel() : hotelId(""), hotelName(""), location(""), rating(0), roomCount(0), packageCount(0) {}
 
-Hotel::Hotel(string id, string name, string loc, int rate) 
-    : hotelId(id), hotelName(name), location(loc), rating(rate), roomCount(0), packageCount(0) {}
+       Hotel::Hotel(string id, string name, string loc, int rate) 
+             : hotelId(id), hotelName(name), location(loc), rating(rate), roomCount(0), packageCount(0) {}
 
-string Hotel::getHotelId() const { return hotelId; }
-string Hotel::getHotelName() const { return hotelName; }
+       string Hotel::getHotelId() const { return hotelId; }
+       string Hotel::getHotelName() const { return hotelName; }
 
-void Hotel::addRoom(const Room& room) {
-    if (roomCount < 5) {
+       void Hotel::addRoom(const Room& room) {
+        if (roomCount < 5) {
         rooms[roomCount++] = room;
-    }
-}
+       }
+      }
 
-void Hotel::addPackage(const HotelPackage& package) {
-    if (packageCount < 3) {
-        packages[packageCount++] = package;
-    }
-}
+      void Hotel::addPackage(const HotelPackage& package) {
+         if (packageCount < 3) {
+          packages[packageCount++] = package;
+       }
+       }
 
-void Hotel::displayHotel() {
-    cout << "Hotel ID: " << hotelId << endl;
-    cout << "Hotel Name: " << hotelName << endl;
-    cout << "Location: " << location << endl;
-    cout << "Rating: " << rating << " stars" << endl;
-    cout << "Available Rooms:" << endl;
-    for (int i = 0; i < roomCount; i++) {
-        if (!rooms[i].getBookingStatus()) {
-            rooms[i].displayRoom();
-            cout << "---" << endl;
+        void Hotel::displayHotel() {
+        cout << "Hotel ID: " << hotelId << endl;
+        cout << "Hotel Name: " << hotelName << endl;
+        cout << "Location: " << location << endl;
+        cout << "Rating: " << rating << " stars" << endl;
+        cout << "Available Rooms:" << endl;
+        for (int i = 0; i < roomCount; i++) {
+           if (!rooms[i].getBookingStatus()) {
+               rooms[i].displayRoom();
+               cout << "---" << endl;
         }
+        }
+        cout << "Available Packages:" << endl;
+        for (int i = 0; i < packageCount; i++) {
+           packages[i].displayPackage();
+           cout << "---" << endl;
     }
-    cout << "Available Packages:" << endl;
-    for (int i = 0; i < packageCount; i++) {
-        packages[i].displayPackage();
-        cout << "---" << endl;
-    }
-}
+      }
 
-Room* Hotel::findAvailableRoom(string roomType) {
-    for (int i = 0; i < roomCount; i++) {
-        if (rooms[i].getRoomType() == roomType && !rooms[i].getBookingStatus()) {
+    Room* Hotel::findAvailableRoom(string roomType) {
+        for (int i = 0; i < roomCount; i++) {
+           if (rooms[i].getRoomType() == roomType && !rooms[i].getBookingStatus()) {
             return &rooms[i];
         }
     }
     return nullptr;
-}
+    }
 
-Room* Hotel::findRoomById(string roomId) {
-    for (int i = 0; i < roomCount; i++) {
-        if (rooms[i].getRoomId() == roomId) {
+    Room* Hotel::findRoomById(string roomId) {
+        for (int i = 0; i < roomCount; i++) {
+           if (rooms[i].getRoomId() == roomId) {
             return &rooms[i];
         }
     }
-    return nullptr;
-}
+      return nullptr;
+     }
 
-HotelPackage* Hotel::findPackage(string packageId) {
-    for (int i = 0; i < packageCount; i++) {
-        if (packages[i].getPackageId() == packageId) {
+     HotelPackage* Hotel::findPackage(string packageId) {
+        for (int i = 0; i < packageCount; i++) {
+           if (packages[i].getPackageId() == packageId) {
             return &packages[i];
         }
     }
     return nullptr;
-}
+     }
 
-// ==================== BOOKING CLASSES IMPLEMENTATION ====================
+    // ==================== BOOKING CLASSES IMPLEMENTATION ====================
 
-Booking::Booking(string id, string custId, string date) 
-    : bookingId(id), customerId(custId), bookingDate(date), status("Active"), totalCost(0.0) {}
+    Booking::Booking(string id, string custId, string date) 
+       : bookingId(id), customerId(custId), bookingDate(date), status("Active"), totalCost(0.0) {}
 
-Booking::~Booking() {}
+    Booking::~Booking() {}
 
-string Booking::getBookingId() const { return bookingId; }
-string Booking::getCustomerId() const { return customerId; }
-double Booking::getTotalCost() const { return totalCost; }
-string Booking::getStatus() const { return status; }
-void Booking::setStatus(string s) { status = s; }
+       string Booking::getBookingId() const { return bookingId; }
+       string Booking::getCustomerId() const { return customerId; }
+       double Booking::getTotalCost() const { return totalCost; }
+       string Booking::getStatus() const { return status; }
+       void Booking::setStatus(string s) { status = s; }
 
 
-Booking* Booking::fromString(const string& data, TravelAgency* agency) {
-    size_t firstComma = data.find(',');
-    string type = data.substr(0, firstComma);
-    string remainingData = data.substr(firstComma + 1);
+     Booking* Booking::fromString(const string& data, TravelAgency* agency) {
+        size_t firstComma = data.find(',');
+        string type = data.substr(0, firstComma);
+        string remainingData = data.substr(firstComma + 1);
 
     if (type == "CAB") {
         size_t pos[7]; // bookingId, customerId, bookingDate, vehicleId, pickup, drop, distance, totalCost
@@ -216,6 +214,6 @@ Booking* Booking::fromString(const string& data, TravelAgency* agency) {
         }
     }
     return nullptr;
-}
+    }
 ```
 
